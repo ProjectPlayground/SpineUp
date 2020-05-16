@@ -8,6 +8,7 @@ export default class MyComponent extends Component {
     return (
       <View style={styles.container}>
         <Text>Git file</Text>
+        <Text>Git file</Text>
       </View>
     );
   }
