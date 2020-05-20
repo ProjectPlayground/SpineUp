@@ -40,7 +40,7 @@ const DoctorsScreen = ({ navigation }) => (
                       profilePic: item.picture.large,
                       subtitle: sub,
                       item: item,
-                      uid: item.email,
+                      uid: item.login.uid,
                     })
                   }
                 />

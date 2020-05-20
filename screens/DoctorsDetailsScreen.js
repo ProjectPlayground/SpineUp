@@ -15,7 +15,7 @@ const DoctorsDetailsScreen = ({ navigation, route }) => {
   const subtitle = route.params.subtitle;
   const recipientId = route.params.uid;
 
-  //console.log('position:' + subtitle);
+  console.log('uid',recipientId);
 
   {
     /*  <Text>{JSON.stringify(name)}</Text>
@@ -82,7 +82,7 @@ const DoctorsDetailsScreen = ({ navigation, route }) => {
                 onPress={() =>
                   navigation.navigate('Messages', {
                     screen: 'MessageDetails',
-                    params: { itemId: '0F7oA8zDJKNc0l5MSmucrSx6RKg2'},
+                    params: { itemId: recipientId },
                   })
                 }
               >

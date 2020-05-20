@@ -27,7 +27,7 @@ export default [
     },
     email: "esperanza.hidalgo@example.com",
     login: {
-      uuid: "56f0595b-376c-478b-ae18-43a1a1d7a7cc",
+      uid: "0F7oA8zDJKNc0l5MSmucrSx6RKg2",
       username: "lazyfish310",
       password: "asimov",
       salt: "DAWCHRP4",
@@ -83,7 +83,7 @@ export default [
     },
     email: "toos.vanbeuzekom@example.com",
     login: {
-      uuid: "6b3554e7-0be9-43e1-9c8e-bb6faa1a3ba4",
+      uid: "BNmWZ8W7xnWqMR4MZs88yw2iOVo2",
       username: "bluekoala971",
       password: "smoothie",
       salt: "nQOrBUom",

@@ -7,6 +7,7 @@ import firebase from 'firebase';
 const MessageDetails = ({ route }) => {
   const [messages, setMessages] = useState([]);
   const itemId = route.params.itemId;
+  console.log('itemid', itemId);
   const chatId =
     Firebase.auth().currentUser.uid.localeCompare(itemId) > 0
       ? Firebase.auth().currentUser.uid + '' + itemId
@@ -110,20 +111,21 @@ const MessageDetails = ({ route }) => {
 
   useEffect(() => {
     var unSub = null;
-    Firebase.firestore()
+    firebase
+      .firestore()
       .collection('messages')
       .doc(chatId)
       .get()
       .then((doc) => {
         if (!doc.data()) {
-          Firebase.firestore()
-            .collection('messages')
-            .doc(chatId)
-            .set({ createdAt: new Date().toISOString() });
+          firebase.firestore().collection('messages').doc(chatId).set({
+            createdAt: new Date().toISOString(),
+          });
         }
       })
       .then(() => {
-        unSub = Firebase.firestore()
+        unSub = firebase
+          .firestore()
           .collection('messages')
           .doc(chatId)
           .collection('messages')
@@ -137,20 +139,15 @@ const MessageDetails = ({ route }) => {
             });
           });
       });
+
     return () => {
       try {
         unSub();
       } catch {}
     };
-  }, []);
+  }, [chatId]);
 
-  return (
-    <GiftedChat
-      messages={messages}
-      onSend={send}
-      user={user()}
-    />
-  );
+  return <GiftedChat messages={messages} onSend={send} user={user()} />;
 };
 
 export default MessageDetails;
