@@ -118,8 +118,8 @@ const MessageStackScreen = () => (
   >
     <MessageStack.Screen name="Messages" component={MessagesScreen} />
     <MessageStack.Screen
-    name="MessageDetails"
-    component={MessageDetails}
+      name="MessageDetails"
+      component={MessageDetails}
     //options={({ route }) => ({ title: route.params.receiverName })}
     />
   </MessageStack.Navigator>

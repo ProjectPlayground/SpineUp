@@ -1,21 +1,60 @@
 /* @flow weak */
 
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, FlatList } from 'react-native';
 import Firebase from '../config/Firebase';
+import ItemChat from '../components/ItemChat';
+
+import { Block, Text } from '../components';
+import { theme } from '../constants';
 
 const MessaagesScreen = ({ navigation }) => {
-  const itemId = Firebase.auth().currentUser.uid;
+  const user = Firebase.auth().currentUser.uid;
+  const [chatList, setChatList] = React.useState([]);
+
+  React.useEffect(() => {
+    var unsubscribe = Firebase.firestore()
+      .collection('users')
+      .doc(user)
+      .collection('recentMessages')
+      .doc('sort')
+      .onSnapshot((snapshot) => {
+        setChatList(snapshot.data().myArr.reverse());
+      });
+    return () => {
+      unsubscribe();
+      setChatList([]);
+    };
+  }, []);
+  //console.log(chatList);
+
+  const renderItem = ({ item }) => {
+    return <ItemChat item={item} navigation={navigation} />;
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>I'm MessaagesScreesn</Text>
-      <Button
-        title="Message Details"
-        onPress={() => navigation.push('MessageDetails', { itemId: itemId })}
-      />
-    </View>
+    <Block color="white" padding={theme.sizes.padding * 1.2}>
+      <Text h1 bold>
+        Messages
+      </Text>
+      <Block padding={[theme.sizes.padding * 1.2, 0]}>
+        <FlatList
+          data={chatList}
+          renderItem={renderItem}
+          keyExtractor={(item) => item}
+        />
+      </Block>
+    </Block>
   );
 };
+
+{/*<View style={styles.container}>
+  <Text>I'm MessaagesScreesn</Text>
+  <Button
+    title="Message Details"
+    onPress={() => navigation.push('MessageDetails', { itemId: user })}
+  />
+</View>*/}
 
 export default MessaagesScreen;
 

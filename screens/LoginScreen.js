@@ -18,21 +18,17 @@ export default function LoginScreen({ navigation }) {
   //const [error, setError] = React.useState([]);
 
   const handleLogin = async () => {
-    {/*const result = await Firebase.auth().signInWithEmailAndPassword(
-      email,
-      password
-    );*/}
-    //console.log('result' + result);
     setLoading(true);
     Firebase.auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => setLoading(false))
       .then(() => {
         const result = Firebase.auth().currentUser;
-        if (result.user.uid) {
+        console.log('result', result.uid);
+        if (result.uid) {
           Firebase.firestore()
             .collection('users')
-            .doc(result.user.uid)
+            .doc(result.uid)
             .collection('recentMessages')
             .doc('sort')
             .set(
@@ -50,23 +46,6 @@ export default function LoginScreen({ navigation }) {
         setLoading(false);
       });
   };
-
-  {/*.then(() => {
-    if (result.user.uid) {
-      Firebase.firestore()
-        .collection('users')
-        .doc(result.user.uid)
-        .collection('recentMessages')
-        .doc('sort')
-        .set({
-          myArr: [],
-        });
-    } else {
-      Firebase.firestore().collection('users').doc(result.user.uid).update({
-        last_logged_in: Date.now(),
-      });
-    }
-  })*/}
 
   return (
     <SafeAreaView style={styles.container}>

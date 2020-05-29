@@ -145,7 +145,7 @@ const MessageDetails = ({ route }) => {
         unSub();
       } catch {}
     };
-  }, [chatId]);
+  }, []);
 
   return <GiftedChat messages={messages} onSend={send} user={user()} />;
 };

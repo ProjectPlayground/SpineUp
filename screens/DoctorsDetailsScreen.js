@@ -31,7 +31,7 @@ const DoctorsDetailsScreen = ({ navigation, route }) => {
         margin={[theme.sizes.padding * 1, 0, 0]}
       >
         <Block center flex={0.55}>
-          <Image source={{ uri: profilePic }} style={styles.image} />
+          <Image source={{ url: profilePic }} style={styles.image} />
           <Block margin={[theme.sizes.padding, 0]} center>
             <Text semibold size={16}>
               {name}

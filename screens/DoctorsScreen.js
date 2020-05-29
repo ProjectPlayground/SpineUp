@@ -30,7 +30,7 @@ const DoctorsScreen = ({ navigation }) => (
             return (
               <Block center padding={[4, 0]}>
                 <Card
-                  image={{ uri: item.picture.large }}
+                  image={{ url: item.picture.large }}
                   title={name}
                   subtitle={item.location.position}
                   onPress={() =>
