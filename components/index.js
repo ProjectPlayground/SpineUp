@@ -10,6 +10,7 @@ import Row from './Row';
 import AppointmentCard from './AppointmentCard';
 import Article from './Article';
 import News from './News';
+import HealthCard from './HealthCard';
 
 export {
   Block,
@@ -24,4 +25,5 @@ export {
   AppointmentCard,
   Article,
   News,
+  HealthCard,
 };
