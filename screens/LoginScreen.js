@@ -1,7 +1,12 @@
 /* @flow */
 
 import React from 'react';
-import { SafeAreaView, StyleSheet, ActivityIndicator } from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 
 import { Block, Text, Input, Button } from '../components';
 import { theme } from '../constants';
@@ -15,7 +20,7 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = React.useState(VALID_EMAIL);
   const [password, setPassword] = React.useState(VALID_PASSWORD);
   const [loading, setLoading] = React.useState(false);
-  //const [error, setError] = React.useState([]);
+  //const [err, setErr] = React.useState([]);
 
   const handleLogin = async () => {
     setLoading(true);
@@ -43,6 +48,7 @@ export default function LoginScreen({ navigation }) {
       })
       .catch((error) => {
         console.log(error);
+        Alert.alert(error.message);
         setLoading(false);
       });
   };

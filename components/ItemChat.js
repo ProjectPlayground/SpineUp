@@ -33,7 +33,7 @@ const ItemChat = ({ item, navigation }) => {
       padding={theme.sizes.padding / 2}
       style={styles.container}
     >
-      <Image source={{ url: pic }} style={styles.image} />
+      <Image source={pic ? { uri: pic } : null} style={styles.image} />
       <Block padding={[0, 16]}>
         <Text h2 semibold>
           {name ? name : ''}

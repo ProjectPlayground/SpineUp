@@ -1,7 +1,7 @@
 /* @flow weak */
 
 import React from 'react';
-import { SafeAreaView, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import { Block, Text, Button } from '../components';
@@ -15,7 +15,7 @@ const DoctorsDetailsScreen = ({ navigation, route }) => {
   const subtitle = route.params.subtitle;
   const recipientId = route.params.uid;
 
-  console.log('uid',recipientId);
+  //console.log('uid',recipientId);
 
   {
     /*  <Text>{JSON.stringify(name)}</Text>
@@ -25,93 +25,95 @@ const DoctorsDetailsScreen = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Block
-        color="white"
-        padding={[0, 0]}
-        margin={[theme.sizes.padding * 1, 0, 0]}
-      >
-        <Block center flex={0.55}>
-          <Image source={{ url: profilePic }} style={styles.image} />
-          <Block margin={[theme.sizes.padding, 0]} center>
-            <Text semibold size={16}>
-              {name}
-            </Text>
-            <Text caption gray>
-              {subtitle}
-            </Text>
+      <ScrollView>
+        <Block
+          color="white"
+          padding={[0, 0]}
+          margin={[theme.sizes.padding * 1, 0, 0]}
+        >
+          <Block center flex={0.55}>
+            <Image source={{ uri: profilePic }} style={styles.image} />
+            <Block margin={[theme.sizes.padding, 0]} center>
+              <Text semibold size={16}>
+                {name}
+              </Text>
+              <Text caption gray>
+                {subtitle}
+              </Text>
+            </Block>
           </Block>
-        </Block>
 
-        <Block style={styles.card}>
-          <Block column flex={0.2}>
-            <Block row center>
-              <FontAwesome
-                name="building"
-                size={16}
-                color={theme.colors.primary}
-              />
-              <Text semibold size={16} style={styles.text}>
-                Spine up hospital Limited
-              </Text>
-            </Block>
-            <Block row center>
-              <FontAwesome
-                name="location-arrow"
-                size={20}
-                color={theme.colors.primary}
-              />
-              <Text caption gray style={styles.text}>
-                {location}
-              </Text>
-            </Block>
-          </Block>
-          <Block flex={0.5} margin={[25, 0]}>
-            <Text h2 bold style={{ marginBottom: 10 }}>
-              Biography
-            </Text>
-            <Text gray>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Text>
-          </Block>
-          <Block row center middle marginLeft={theme.sizes.padding * 2}>
-            <Block style={styles.icon} center middle>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('Messages', {
-                    screen: 'MessageDetails',
-                    params: { itemId: recipientId },
-                  })
-                }
-              >
-                <MaterialIcons
-                  name="message"
-                  size={21}
+          <Block style={styles.card}>
+            <Block column flex={0.5}>
+              <Block row center>
+                <FontAwesome
+                  name="building"
+                  size={16}
                   color={theme.colors.primary}
                 />
-              </TouchableOpacity>
+                <Text semibold size={16} style={styles.text}>
+                  Spine up hospital Limited
+                </Text>
+              </Block>
+              <Block row center>
+                <FontAwesome
+                  name="location-arrow"
+                  size={20}
+                  color={theme.colors.primary}
+                />
+                <Text caption gray style={styles.text}>
+                  {location}
+                </Text>
+              </Block>
             </Block>
-
-            <Button
-              gradient
-              onPress={() =>
-                navigation.push('Booking', {
-                  profilePic: profilePic,
-                  name: name,
-                  subtitle: subtitle,
-                })
-              }
-              style={styles.button}
-            >
-              <Text white center>
-                Book an Appointment
+            <Block flex={0.9} margin={[25, 0]}>
+              <Text h2 bold style={{ marginBottom: 10 }}>
+                Biography
               </Text>
-            </Button>
+              <Text gray>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </Text>
+            </Block>
+            <Block row center middle marginLeft={theme.sizes.margin}>
+              <Block style={styles.icon} center middle>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('Messages', {
+                      screen: 'MessageDetails',
+                      params: { itemId: recipientId },
+                    })
+                  }
+                >
+                  <MaterialIcons
+                    name="message"
+                    size={21}
+                    color={theme.colors.primary}
+                  />
+                </TouchableOpacity>
+              </Block>
+
+              <Button
+                gradient
+                onPress={() =>
+                  navigation.push('Booking', {
+                    profilePic: profilePic,
+                    name: name,
+                    subtitle: subtitle,
+                  })
+                }
+                style={styles.button}
+              >
+                <Text white center>
+                  Book an Appointment
+                </Text>
+              </Button>
+            </Block>
           </Block>
         </Block>
-      </Block>
+      </ScrollView>
     </SafeAreaView>
   );
 };

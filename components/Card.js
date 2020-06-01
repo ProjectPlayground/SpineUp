@@ -22,7 +22,10 @@ export default class Card extends Component {
     return (
       <Block color={color || theme.colors.white} style={cardStyles} {...props}>
         <Block row center>
-          <Image source={image} style={styles.image} />
+          <Image
+            source={image}
+            style={styles.image} //resizeMethod="resize"
+          />
           <Block padding={[0, 16]}>
             <Text semibold size={16}>
               {title}

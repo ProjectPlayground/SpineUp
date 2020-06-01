@@ -15,6 +15,8 @@ import { theme } from '../constants';
 
 import Firebase from '../config/Firebase';
 
+console.ignoredYellowBox = ['Setting a timer'];
+
 const HomeScreen = ({ navigation, route, props }) => {
   const user = Firebase.auth().currentUser;
   //console.log(user);
@@ -52,12 +54,14 @@ const HomeScreen = ({ navigation, route, props }) => {
       setDate(route.params.date);
       setTime(route.params.time);
     }
-  }, [ user,
-    name, photoURL,
+  }, [
+    user,
+    name,
+    photoURL,
     route.params?.profilePic,
     route.params?.doc,
     route.params?.subtitle,
-    userName,
+    userName
   ]);
 
   //const doc = route.params.name;

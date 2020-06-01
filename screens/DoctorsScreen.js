@@ -20,6 +20,7 @@ const DoctorsScreen = ({ navigation }) => (
 
       <Block style={{ marginTop: theme.sizes.padding / 2 }}>
         <FlatList
+         removeClippedSubviews={true}
           data={users}
           keyExtractor={(item) => {
             return `${item.id.value}-${item.phone}`;
@@ -27,10 +28,11 @@ const DoctorsScreen = ({ navigation }) => (
           renderItem={({ item }) => {
             const name = `${item.name.title} ${item.name.first} ${item.name.last}`;
             const sub = item.location.position;
+            //console.log(item)
             return (
               <Block center padding={[4, 0]}>
                 <Card
-                  image={{ url: item.picture.large }}
+                  image={{ uri: item.picture.large }}
                   title={name}
                   subtitle={item.location.position}
                   onPress={() =>

@@ -1,7 +1,7 @@
 /* @flow weak */
 
 import React from 'react';
-import { View, StyleSheet, Button, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import Firebase from '../config/Firebase';
 import ItemChat from '../components/ItemChat';
 
@@ -25,7 +25,7 @@ const MessaagesScreen = ({ navigation }) => {
       unsubscribe();
       setChatList([]);
     };
-  }, []);
+  },[]);
   //console.log(chatList);
 
   const renderItem = ({ item }) => {
@@ -48,18 +48,4 @@ const MessaagesScreen = ({ navigation }) => {
   );
 };
 
-{/*<View style={styles.container}>
-  <Text>I'm MessaagesScreesn</Text>
-  <Button
-    title="Message Details"
-    onPress={() => navigation.push('MessageDetails', { itemId: user })}
-  />
-</View>*/}
-
 export default MessaagesScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
