@@ -35,7 +35,7 @@ const ProfileScreen = ({ navigation }) => {
           'and profile picture:' + user.photoURL
         );
       })
-      .then(() => navigation.navigate('Home'))
+      .then(() => navigation.navigate('Home', { displayName: user.name }))
       .catch((error) => {
         setLoading(false);
         console.log(error);
