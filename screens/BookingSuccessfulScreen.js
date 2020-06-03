@@ -80,6 +80,38 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
               </Text>
             </Block>
           </Block>
+
+          <Block row center flex={0.1}>
+            <FontAwesome
+              name="location-arrow"
+              size={21}
+              color={theme.colors.gray}
+            />
+            <Text semibold size={16} style={{ paddingLeft: 4 }}>
+              Doctor
+            </Text>
+            <Block style={{ alignItems: 'flex-end' }}>
+              <Text semibold size={16}>
+                {name}
+              </Text>
+            </Block>
+          </Block>
+
+          <Block row center flex={0.1}>
+            <FontAwesome
+              name="location-arrow"
+              size={21}
+              color={theme.colors.gray}
+            />
+            <Text semibold size={16} style={{ paddingLeft: 4 }}>
+              position
+            </Text>
+            <Block style={{ alignItems: 'flex-end' }}>
+              <Text semibold size={16}>
+                {subtitle}
+              </Text>
+            </Block>
+          </Block>
         </Block>
 
         <Button
