@@ -46,71 +46,69 @@ const BookingScreen = ({ navigation, route, props }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Block
-          style={styles.container}
-          color="white"
-          padding={[theme.sizes.padding * 1, 0, 0]}
-        >
-          <Block center flex={0.55}>
-            <Image source={{ uri: profilePic }} style={styles.image} />
-            <Block center padding={[theme.sizes.padding, 0]}>
-              <Text semibold size={16}>
-                {name}
-              </Text>
-              <Text caption gray>
-                {subtitle}
-              </Text>
-            </Block>
+      <Block
+        style={styles.container}
+        color="white"
+        padding={[theme.sizes.padding * 1, 0, 0]}
+      >
+        <Block center flex={0.55}>
+          <Image source={{ uri: profilePic }} style={styles.image} />
+          <Block center padding={[theme.sizes.padding, 0]}>
+            <Text semibold size={16}>
+              {name}
+            </Text>
+            <Text caption gray>
+              {subtitle}
+            </Text>
           </Block>
+        </Block>
 
-          <Block style={styles.card}>
-            <Block flex={0.5} style={styles.picker}>
-              <Button shadow onPress={showDatepicker}>
-                <Text center>Select Date</Text>
-              </Button>
-              <Button shadow onPress={showTimepicker}>
-                <Text center>Select Time</Text>
-              </Button>
-            </Block>
-            <Block>
+        <Block style={styles.card}>
+          <Block flex={0.5} style={styles.picker}>
+            <Button shadow onPress={showDatepicker}>
+              <Text center>Select Date</Text>
+            </Button>
+            <Button shadow onPress={showTimepicker}>
+              <Text center>Select Time</Text>
+            </Button>
+          </Block>
+          <Block>
             <Text center>
-                {bookDate}
-                {bookTime}
-              </Text>
-              {show && (
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  timeZoneOffsetInMinutes={0}
-                  value={date}
-                  mode={mode}
-                  is24Hour={true}
-                  display="default"
-                  onChange={onChange}
-                />
-              )}
-              <Block style={styles.book}>
-                <Button
-                  gradient
-                  onPress={() =>
-                    navigation.navigate('Payment', {
-                      date: d,
-                      time: t,
-                      name: name,
-                      subtitle: subtitle,
-                      profilePic: profilePic,
-                    })
-                  }
-                >
-                  <Text white center>
-                    Book for Ghc 100
-                  </Text>
-                </Button>
-              </Block>
+              {bookDate}
+              {bookTime}
+            </Text>
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                timeZoneOffsetInMinutes={0}
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+              />
+            )}
+            <Block style={styles.book}>
+              <Button
+                gradient
+                onPress={() =>
+                  navigation.navigate('Payment', {
+                    date: d,
+                    time: t,
+                    name: name,
+                    subtitle: subtitle,
+                    profilePic: profilePic,
+                  })
+                }
+              >
+                <Text white center>
+                  Book for Ghc 100
+                </Text>
+              </Button>
             </Block>
           </Block>
+        </Block>
       </Block>
-      </ScrollView>
     </SafeAreaView>
   );
 };
