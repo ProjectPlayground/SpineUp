@@ -39,10 +39,16 @@ const HomeScreen = ({ navigation, route, props }) => {
 
   React.useEffect(() => {
     setUse(user);
-    setUserName(name);
+
     if (photoURL) {
       setUserPhoto(photoURL);
     }
+    if (user.displayName) {
+      setUserName(user.displayName);
+    } else {
+      setUserName(name);
+    }
+    console.log(user);
     if (
       route.params?.profilePic ||
       route.params?.doc ||
@@ -106,7 +112,7 @@ const HomeScreen = ({ navigation, route, props }) => {
               image={{ uri: profilePic }}
               date={date}
               time={time}
-              //onPress={console.log('no')}
+              //onPress={navigation.navigate('Booking')}
             />
           </Block>
           <Block flex={0.2} style={styles.pad}>
