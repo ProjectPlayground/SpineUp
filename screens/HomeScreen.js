@@ -20,7 +20,7 @@ console.ignoredYellowBox = ['Setting a timer'];
 const HomeScreen = ({ navigation, route, props }) => {
   const user = Firebase.auth().currentUser;
   //console.log(user);
-  var name = user.email;
+  var name = user.displayName;
   const photoURL = user.photoURL;
 
   const [use, setUse] = React.useState({ user });
@@ -35,8 +35,7 @@ const HomeScreen = ({ navigation, route, props }) => {
   const [subtitle, setSubtitle] = React.useState('Doctors Position');
   const [date, setDate] = React.useState('date');
   const [time, setTime] = React.useState('time');
-  const [displayName, setDisplayName] = React.useState('tolu')
-  //const [userName, setUserName] = React.useState('');
+  const [displayName, setDisplayName] = React.useState(name);
 
   React.useEffect(() => {
     if (route.params?.fname) {}

@@ -118,11 +118,17 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
           gradient
           onPress={() =>
             navigation.navigate('Home', {
-              date: date,
-              time: time,
-              name: name,
-              subtitle: subtitle,
-              profilePic: profilePic,
+              screen: 'Home',
+              params: {
+                screen: 'Home',
+                params: {
+                  date: date,
+                  time: time,
+                  name: name,
+                  subtitle: subtitle,
+                  profilePic: profilePic,
+                },
+              },
             })
           }
         >
