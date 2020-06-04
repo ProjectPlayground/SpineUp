@@ -7,7 +7,7 @@ import users from '../constants/users';
 import { Block, Text, Card } from '../components';
 import { theme } from '../constants';
 
-const DoctorsScreen = ({ navigation }) => (
+const DoctorsScreen = ({ navigation, route }) => (
   <SafeAreaView style={styles.container}>
     <Block
       color="white"
@@ -20,7 +20,7 @@ const DoctorsScreen = ({ navigation }) => (
 
       <Block style={{ marginTop: theme.sizes.padding / 2 }}>
         <FlatList
-         removeClippedSubviews={true}
+          removeClippedSubviews={true}
           data={users}
           keyExtractor={(item) => {
             return `${item.id.value}-${item.phone}`;

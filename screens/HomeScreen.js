@@ -20,7 +20,7 @@ console.ignoredYellowBox = ['Setting a timer'];
 const HomeScreen = ({ navigation, route, props }) => {
   const user = Firebase.auth().currentUser;
   //console.log(user);
-  const name = user.email;
+  var name = user.email;
   const photoURL = user.photoURL;
 
   const [use, setUse] = React.useState({ user });
@@ -35,7 +35,12 @@ const HomeScreen = ({ navigation, route, props }) => {
   const [subtitle, setSubtitle] = React.useState('Doctors Position');
   const [date, setDate] = React.useState('date');
   const [time, setTime] = React.useState('time');
-  const [userName, setUserName] = React.useState(null);
+  const [displayName, setDisplayName] = React.useState('tolu')
+  //const [userName, setUserName] = React.useState('');
+
+  React.useEffect(() => {
+    if (route.params?.fname) {}
+  }, [route.params?.fname]);
 
   React.useEffect(() => {
     setUse(user);
@@ -43,11 +48,10 @@ const HomeScreen = ({ navigation, route, props }) => {
     if (photoURL) {
       setUserPhoto(photoURL);
     }
-    if (user.displayName) {
-      setUserName(user.displayName);
-    } else {
-      setUserName(name);
+    if (route.params?.displayName) {
+      console.log('route', route.params.displayName);
     }
+
     console.log(user);
     if (
       route.params?.profilePic ||
@@ -62,12 +66,10 @@ const HomeScreen = ({ navigation, route, props }) => {
     }
   }, [
     user,
-    name,
     photoURL,
     route.params?.profilePic,
     route.params?.doc,
     route.params?.subtitle,
-    userName
   ]);
 
   //const doc = route.params.name;
@@ -90,7 +92,7 @@ const HomeScreen = ({ navigation, route, props }) => {
                 Hello,
               </Text>
               <Text h2 bold style={{ marginTop: theme.sizes.padding / 5 }}>
-                {userName}
+                {route.params?.fname ? route.params?.fname : displayName}
               </Text>
             </Block>
             <Image source={{ uri: userPhoto }} style={styles.image} />

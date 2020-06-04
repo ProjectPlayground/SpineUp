@@ -29,13 +29,19 @@ const ProfileScreen = ({ navigation }) => {
       })
       .then(() => {
         setLoading(false);
-        const name = `${firstName}`;
-        console.log(
-          'updated userName. name:' + `${firstName} ${lastName}`,
-          'and profile picture:' + user.photoURL
-        );
+        console.log(user);
       })
-      .then(() => navigation.navigate('Home', { displayName: user.name }))
+      .then(() => {
+        navigation.navigate('Home', {
+          screen: 'Home',
+          params: {
+            screen: 'Home',
+            params: {
+              fname: user.displayName,
+            },
+          },
+        });
+      })
       .catch((error) => {
         setLoading(false);
         console.log(error);
