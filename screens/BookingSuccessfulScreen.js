@@ -3,6 +3,7 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Image } from 'react-native';
 import { MaterialIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
+import Firebase from '../config/Firebase';
 
 import { Block, Text, Button } from '../components';
 import { theme } from '../constants';
@@ -120,14 +121,11 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
             navigation.navigate('Home', {
               screen: 'Home',
               params: {
-                screen: 'Home',
-                params: {
-                  date: date,
-                  time: time,
-                  name: name,
-                  subtitle: subtitle,
-                  profilePic: profilePic,
-                },
+                date: date,
+                time: time,
+                name: name,
+                subtitle: subtitle,
+                profilePic: profilePic,
               },
             })
           }

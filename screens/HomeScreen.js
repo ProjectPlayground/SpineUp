@@ -47,11 +47,7 @@ const HomeScreen = ({ navigation, route, props }) => {
     if (photoURL) {
       setUserPhoto(photoURL);
     }
-    if (route.params?.displayName) {
-      console.log('route', route.params.displayName);
-    }
 
-    console.log(user);
     if (
       route.params?.profilePic ||
       route.params?.doc ||
@@ -64,6 +60,7 @@ const HomeScreen = ({ navigation, route, props }) => {
       setTime(route.params.time);
     }
   }, [
+    route.params,
     user,
     photoURL,
     route.params?.profilePic,
@@ -117,7 +114,10 @@ const HomeScreen = ({ navigation, route, props }) => {
             />
           </Block>
           <Block flex={0.2} style={styles.pad}>
-            <Button gradient onPress={() => navigation.push('Doctors')}>
+            <Button
+              gradient
+              onPress={() => navigation.navigate('Doctors', { initial: false })}
+            >
               <Text center white>
                 Book An Appointment
               </Text>
