@@ -13,6 +13,8 @@ const BookingScreen = ({ navigation, route, props }) => {
   const profilePic = route.params.profilePic;
   const name = route.params.name;
   const subtitle = route.params.subtitle;
+  const docId = route.params.docId;
+  //console.log('s', docId);
 
   const [date, setDate] = React.useState(new Date(1598051730000));
   const [mode, setMode] = React.useState('date');
@@ -98,6 +100,7 @@ const BookingScreen = ({ navigation, route, props }) => {
                     name: name,
                     subtitle: subtitle,
                     profilePic: profilePic,
+                    docId: docId,
                   })
                 }
               >

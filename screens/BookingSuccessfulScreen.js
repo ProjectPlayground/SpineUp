@@ -14,6 +14,9 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
   const subtitle = route.params.subtitle;
   const date = route.params.date;
   const time = route.params.time;
+  const docID = route.params.docId;
+
+  console.log('s',docID);
 
   return (
     <SafeAreaView style={styles.container}>

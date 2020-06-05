@@ -14,68 +14,70 @@ const PaymentScreen = ({ navigation, route }) => {
   const profilePic = route.params.profilePic;
   const name = route.params.name;
   const subtitle = route.params.subtitle;
+  const docID = route.params.docId;
   const date = route.params.date;
   const time = route.params.time;
 
+  console.log('p', docID);
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Block color="white">
-          <Block padding={theme.sizes.base + 4} flex={0.1}>
-            <Text h1 bold>
-              Payment
-            </Text>
-          </Block>
-          <Block style={styles.card} flex={1}>
-            <Block center flex={0.4}>
-              <Image
-                source={require('../assets/images/mtn.png')}
-                style={styles.image}
-              />
-            </Block>
-            <Block>
-              <Input
-                label="Mobile Money Number"
-                style={styles.input}
-                defaultValue={number}
-                onChangeText={(text) => setNumber(text)}
-              />
-
-              <Input
-                label="Password"
-                style={styles.input}
-                defaultValue={password}
-                onChangeText={(text) => setPassword(text)}
-                secureTextEntry={true}
-              />
-
-              <Input
-                label="Amount"
-                style={styles.input}
-                defaultValue={amount}
-                onChangeText={(text) => setAmount(text)}
-              />
-            </Block>
-
-            <Button
-              gradient
-              onPress={() => {
-                navigation.push('BookingSuccessful', {
-                  date: date,
-                  time: time,
-                  name: name,
-                  subtitle: subtitle,
-                  profilePic: profilePic,
-                });
-              }}
-            >
-              <Text white center>
-                Confirm
-              </Text>
-            </Button>
-          </Block>
+      <Block color="white">
+        <Block padding={theme.sizes.base + 4} flex={0.1}>
+          <Text h1 bold>
+            Payment
+          </Text>
         </Block>
-      </ScrollView>
+        <Block style={styles.card} flex={1}>
+          <Block center flex={0.4}>
+            <Image
+              source={require('../assets/images/mtn.png')}
+              style={styles.image}
+            />
+          </Block>
+          <Block>
+            <Input
+              label="Mobile Money Number"
+              style={styles.input}
+              defaultValue={number}
+              onChangeText={(text) => setNumber(text)}
+            />
+
+            <Input
+              label="Password"
+              style={styles.input}
+              defaultValue={password}
+              onChangeText={(text) => setPassword(text)}
+              secureTextEntry={true}
+            />
+
+            <Input
+              label="Amount"
+              style={styles.input}
+              defaultValue={amount}
+              onChangeText={(text) => setAmount(text)}
+            />
+          </Block>
+
+          <Button
+            gradient
+            onPress={() => {
+              navigation.push('BookingSuccessful', {
+                date: date,
+                time: time,
+                name: name,
+                subtitle: subtitle,
+                profilePic: profilePic,
+                docId: docID,
+              });
+            }}
+          >
+            <Text white center>
+              Confirm
+            </Text>
+          </Button>
+        </Block>
+      </Block>
     </SafeAreaView>
   );
 };
