@@ -42,6 +42,18 @@ export default function LoginScreen({ navigation }) {
               },
               { merge: true }
             );
+
+          Firebase.firestore()
+            .collection('users')
+            .doc(result.uid)
+            .collection('recentAppointments')
+            .doc('sort')
+            .set(
+              {
+                myArr: [],
+              },
+              { merge: true }
+            );
         } else {
           console.log('error');
         }

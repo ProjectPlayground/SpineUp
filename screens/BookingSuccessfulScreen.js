@@ -15,8 +15,39 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
   const date = route.params.date;
   const time = route.params.time;
   const docID = route.params.docId;
+  console.log('docId', docID);
 
-  console.log('s',docID);
+  const AppointmentID =
+    Firebase.auth().currentUser.uid.localCompare(docID) > 0
+      ? Firebase.auth().currentUser.uid + '' + docID
+      : docID + '' + Firebase.auth().currentUser.uid;
+
+  //console.log('uid', AppointmentID);
+
+  const make = (appointments) => {
+    for (let i = 0; i < appointments.length; i++) {
+      let { user } = appointments[i];
+
+      const appointment = {
+        date: date,
+        time: time,
+        name: name,
+        subtitle: subtitle,
+        profilePic: profilePic,
+        sender: user,
+        receiver: docID,
+        createdAt: new Date().toISOString(),
+      };
+    }
+  };
+
+  const user = () => {
+    return {
+      name: Firebase.auth().currentUser.displayName,
+      id: Firebase.auth().currentUser.uid,
+      avatar: Firebase.auth.currentUser.photoURL,
+    };
+  };
 
   return (
     <SafeAreaView style={styles.container}>
