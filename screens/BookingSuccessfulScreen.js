@@ -4,6 +4,8 @@ import React from 'react';
 import { SafeAreaView, StyleSheet, Image } from 'react-native';
 import { MaterialIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import Firebase from '../config/Firebase';
+import firebase from 'firebase';
+import 'firebase/firestore';
 
 import { Block, Text, Button } from '../components';
 import { theme } from '../constants';
@@ -15,18 +17,17 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
   const date = route.params.date;
   const time = route.params.time;
   const docID = route.params.docId;
-  console.log('docId', docID);
+  //console.log('docId', docID);
+  const [appointments, setAppointments] = React.useState([]);
 
-  const AppointmentID =
-    Firebase.auth().currentUser.uid.localCompare(docID) > 0
+  const appointmentID =
+    Firebase.auth().currentUser.uid.localeCompare(docID) > 0
       ? Firebase.auth().currentUser.uid + '' + docID
-      : docID + '' + Firebase.auth().currentUser.uid;
+      : docID + '' + firebase.auth().currentUser.uid;
 
-  //console.log('uid', AppointmentID);
+  console.log('uid', appointmentID);
 
   const make = (appointments) => {
-    for (let i = 0; i < appointments.length; i++) {
-      let { user } = appointments[i];
 
       const appointment = {
         date: date,
@@ -38,15 +39,75 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
         receiver: docID,
         createdAt: new Date().toISOString(),
       };
-    }
-  };
 
-  const user = () => {
-    return {
-      name: Firebase.auth().currentUser.displayName,
-      id: Firebase.auth().currentUser.uid,
-      avatar: Firebase.auth.currentUser.photoURL,
-    };
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(firebase.auth().currentUser.uid)
+        .collection('recentAppointments')
+        .doc('sort')
+        .set(
+          { myArr: firebase.firestore.FieldValue.arrayRemove(docID) },
+          { merge: true }
+        )
+        .then(() => {
+          firebase
+            .firestore()
+            .collection('users')
+            .doc(firebase.auth().currentUser.uid)
+            .collection('recentAppointments')
+            .doc('sort')
+            .set(
+              { myArr: firebase.firestore.FieldValue.arrayUnion(docID) },
+              { merge: true }
+            );
+        })
+        .catch((err) => console.log(err));
+
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(docID)
+        .collection('recentAppointments')
+        .doc('sort')
+        .set({
+          myArr: firebase.firestore.FieldValue.arrayRemove(
+            firebase.auth().currentUser.uid
+          ),
+          },
+          { merge: true }
+        )
+        .then(() => {
+          firebase
+            .firestore()
+            .collection('users')
+            .doc(docID)
+            .collection('recentAppointments')
+            .doc('sort')
+            .set({
+              myArr: firebase.firestore.FieldValue.arrayUnion(
+                firebase.auth().currentUser.uid
+              ),
+              },
+              { merge: true }
+            );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      firebase
+        .firestore()
+        .collection('appointments')
+        .doc(appointmentID)
+        .collection('appointments')
+        .doc(new Date().getTime().toString())
+        .set(appointment);
+    }
+
+  const user = {
+    name: Firebase.auth().currentUser.displayName,
+    id: Firebase.auth().currentUser.uid,
+    avatar: Firebase.auth().currentUser.photoURL,
   };
 
   return (
@@ -149,21 +210,7 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
           </Block>
         </Block>
 
-        <Button
-          gradient
-          onPress={() =>
-            navigation.navigate('Home', {
-              screen: 'Home',
-              params: {
-                date: date,
-                time: time,
-                name: name,
-                subtitle: subtitle,
-                profilePic: profilePic,
-              },
-            })
-          }
-        >
+        <Button gradient onPress={() => make()}>
           <Text white center>
             Confirm
           </Text>
