@@ -27,43 +27,36 @@ export default function LoginScreen({ navigation }) {
     Firebase.auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => setLoading(false))
-      .then(() => {
-        const result = Firebase.auth().currentUser;
-        console.log('result', result.uid);
-        if (result.uid) {
-          Firebase.firestore()
-            .collection('users')
-            .doc(result.uid)
-            .collection('recentMessages')
-            .doc('sort')
-            .set(
-              {
-                myArr: [],
-              },
-              { merge: true }
-            );
-
-          Firebase.firestore()
-            .collection('users')
-            .doc(result.uid)
-            .collection('recentAppointments')
-            .doc('sort')
-            .set(
-              {
-                myArr: [],
-              },
-              { merge: true }
-            );
-        } else {
-          console.log('error');
-        }
-      })
       .catch((error) => {
         console.log(error);
         Alert.alert(error.message);
         setLoading(false);
       });
   };
+
+  {/*
+    .then(() => {
+      const result = Firebase.auth().currentUser;
+      console.log('result', result.uid);
+      if (result.uid) {
+        Firebase.firestore()
+          .collection('users')
+          .doc(result.uid)
+          .collection('recentMessages')
+          .doc('sort')
+          .set(
+            {
+              myArr: [],
+            },
+            {
+              merge: true,
+            }
+          );
+      } else {
+        console.log('error');
+      }
+    })
+  */}
 
   return (
     <SafeAreaView style={styles.container}>
