@@ -12,15 +12,11 @@ const DoctorsScreen = ({ navigation, route }) => (
     <Block
       color="white"
       padding={[0, theme.sizes.padding * 1.2]}
-      style={{ marginTop: theme.sizes.padding / 2 }}
+      //style={{ marginTop: theme.sizes.padding / 2 }}
     >
-      <Text h1 bold>
-        Doctors
-      </Text>
-
       <Block style={{ marginTop: theme.sizes.padding / 2 }}>
         <FlatList
-          removeClippedSubviews={true}
+          //removeClippedSubviews={true}
           data={users}
           keyExtractor={(item) => {
             return `${item.id.value}-${item.phone}`;
