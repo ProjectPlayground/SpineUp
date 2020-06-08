@@ -28,81 +28,82 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
   console.log('uid', appointmentID);
 
   const make = (appointments) => {
+    const appointment = {
+      date: date,
+      time: time,
+      name: name,
+      subtitle: subtitle,
+      profilePic: profilePic,
+      sender: user,
+      receiver: docID,
+      createdAt: new Date().toISOString(),
+    };
 
-      const appointment = {
-        date: date,
-        time: time,
-        name: name,
-        subtitle: subtitle,
-        profilePic: profilePic,
-        sender: user,
-        receiver: docID,
-        createdAt: new Date().toISOString(),
-      };
+    firebase
+      .firestore()
+      .collection('users')
+      .doc(firebase.auth().currentUser.uid)
+      .collection('recentAppointments')
+      .doc('sort')
+      .set(
+        { myArr: firebase.firestore.FieldValue.arrayRemove(docID) },
+        { merge: true }
+      )
+      .then(() => {
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(firebase.auth().currentUser.uid)
+          .collection('recentAppointments')
+          .doc('sort')
+          .set(
+            { myArr: firebase.firestore.FieldValue.arrayUnion(docID) },
+            { merge: true }
+          );
+      })
+      .catch((err) => console.log(err));
 
-      firebase
-        .firestore()
-        .collection('users')
-        .doc(firebase.auth().currentUser.uid)
-        .collection('recentAppointments')
-        .doc('sort')
-        .set(
-          { myArr: firebase.firestore.FieldValue.arrayRemove(docID) },
-          { merge: true }
-        )
-        .then(() => {
-          firebase
-            .firestore()
-            .collection('users')
-            .doc(firebase.auth().currentUser.uid)
-            .collection('recentAppointments')
-            .doc('sort')
-            .set(
-              { myArr: firebase.firestore.FieldValue.arrayUnion(docID) },
-              { merge: true }
-            );
-        })
-        .catch((err) => console.log(err));
-
-      firebase
-        .firestore()
-        .collection('users')
-        .doc(docID)
-        .collection('recentAppointments')
-        .doc('sort')
-        .set({
+    firebase
+      .firestore()
+      .collection('users')
+      .doc(docID)
+      .collection('recentAppointments')
+      .doc('sort')
+      .set(
+        {
           myArr: firebase.firestore.FieldValue.arrayRemove(
             firebase.auth().currentUser.uid
           ),
-          },
-          { merge: true }
-        )
-        .then(() => {
-          firebase
-            .firestore()
-            .collection('users')
-            .doc(docID)
-            .collection('recentAppointments')
-            .doc('sort')
-            .set({
+        },
+        { merge: true }
+      )
+      .then(() => {
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(docID)
+          .collection('recentAppointments')
+          .doc('sort')
+          .set(
+            {
               myArr: firebase.firestore.FieldValue.arrayUnion(
                 firebase.auth().currentUser.uid
               ),
-              },
-              { merge: true }
-            );
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      firebase
-        .firestore()
-        .collection('appointments')
-        .doc(appointmentID)
-        .collection('appointments')
-        .doc(new Date().getTime().toString())
-        .set(appointment);
-    }
+            },
+            { merge: true }
+          );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    firebase
+      .firestore()
+      .collection('appointments')
+      .doc(appointmentID)
+      .collection('appointments')
+      .doc(new Date().getTime().toString())
+      .set(appointment);
+  };
 
   const user = {
     name: Firebase.auth().currentUser.displayName,
