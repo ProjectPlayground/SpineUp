@@ -115,8 +115,10 @@ const MessageStackScreen = () => (
     screenOptions={({ navigation }) => ({
       headerRight: () => <LogoTitle navigation={navigation} />,
     })}
+    initialRouteName="Messages"
   >
     <MessageStack.Screen name="Messages" component={MessagesScreen} />
+
     <MessageStack.Screen
       name="MessageDetails"
       component={MessageDetails}
