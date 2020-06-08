@@ -139,7 +139,7 @@ export default [
     },
     email: "leena.belhaj@example.com",
     login: {
-      uuid: "33d27fef-c302-4fe0-95de-c29eac74c107",
+      uid: "hreOx8dQHQghabfkuifRtyKAuOG2",
       username: "beautifulfrog367",
       password: "faithful",
       salt: "tSal1Htc",
@@ -162,7 +162,7 @@ export default [
       value: "02505007"
     },
     picture: {
-      large: "https://p40.tr3.n0.cdn.getcloudapp.com/items/d5uve9lR/doc3.png?v=c9caed08b752e1094a00e2761aed6b0d",
+      large: "https://randomuser.me/api/portraits/women/44.jpg",
       medium: "https://randomuser.me/api/portraits/med/women/18.jpg",
       thumbnail: "https://randomuser.me/api/portraits/thumb/women/18.jpg"
     },
