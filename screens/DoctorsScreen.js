@@ -16,6 +16,7 @@ const DoctorsScreen = ({ navigation, route }) => (
     >
       <Block style={{ marginTop: theme.sizes.padding / 2 }}>
         <FlatList
+          showsVerticalScrollIndicator={false}
           //removeClippedSubviews={true}
           data={users}
           keyExtractor={(item) => {
