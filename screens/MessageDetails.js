@@ -45,8 +45,9 @@ const MessageDetails = ({ route }) => {
         .doc(firebase.auth().currentUser.uid)
         .collection('recentMessages')
         .doc('sort')
-        .set({
-          myArr: firebase.firestore.FieldValue.arrayRemove(itemId),
+        .set(
+          {
+            myArr: firebase.firestore.FieldValue.arrayRemove(itemId),
           },
           { merge: true }
         )
@@ -57,9 +58,12 @@ const MessageDetails = ({ route }) => {
             .doc(firebase.auth().currentUser.uid)
             .collection('recentMessages')
             .doc('sort')
-            .set({
-              myArr: firebase.firestore.FieldValue.arrayUnion(itemId),
-            }, {merge: true});
+            .set(
+              {
+                myArr: firebase.firestore.FieldValue.arrayUnion(itemId),
+              },
+              { merge: true }
+            );
         })
         .catch((err) => {
           console.log('err');
@@ -71,11 +75,14 @@ const MessageDetails = ({ route }) => {
         .doc(itemId)
         .collection('recentMessages')
         .doc('sort')
-        .set({
-          myArr: firebase.firestore.FieldValue.arrayRemove(
-            firebase.auth().currentUser.uid
-          ),
-        }, {merge: true})
+        .set(
+          {
+            myArr: firebase.firestore.FieldValue.arrayRemove(
+              firebase.auth().currentUser.uid
+            ),
+          },
+          { merge: true }
+        )
         .then(() => {
           firebase
             .firestore()
@@ -83,11 +90,14 @@ const MessageDetails = ({ route }) => {
             .doc(itemId)
             .collection('recentMessages')
             .doc('sort')
-            .set({
-              myArr: firebase.firestore.FieldValue.arrayUnion(
-                firebase.auth().currentUser.uid
-              ),
-            },{merge: true});
+            .set(
+              {
+                myArr: firebase.firestore.FieldValue.arrayUnion(
+                  firebase.auth().currentUser.uid
+                ),
+              },
+              { merge: true }
+            );
         })
         .catch((err) => {
           console.log('err');
