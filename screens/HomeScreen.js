@@ -19,7 +19,7 @@ console.ignoredYellowBox = ['Setting a timer'];
 
 const HomeScreen = ({ navigation, route, props }) => {
   const user = Firebase.auth().currentUser;
-  //console.log(user);
+  console.log(user);
   var name = user.displayName;
   const photoURL = user.photoURL;
 
