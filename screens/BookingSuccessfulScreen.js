@@ -45,7 +45,7 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
     account_type: 'doctor',
   };
 
-  const get = (user) => {
+  const get = () => {
     var service_type = '';
 
   {/*  if (user.account_type === 'client') {
@@ -54,36 +54,35 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
       service_type = 'receiver';
     }
   */}
-    if (
-      firebase
-        .firestore()
-        .collection('users')
-        .doc(Firebase.auth().currentUser.uid)
-        .where('account_type', '==', 'client')
-    ) {
-      service_type = 'sender';
-    } else if (
-      firebase
-        .firestore()
-        .collection('users')
-        .doc(Firebase.auth().currentUser.uid)
-        .where('account_type', '==', 'doctor')
-    ) {
-      service_type = 'receiver';
-    }
+
     firebase
       .firestore()
-      .collection('appointment')
-      .where('service_type.id', '==', Firebase.auth().currentUser.uid)
+      .collection('users')
+      .doc(Firebase.auth().currentUser.uid)
       .get()
-      .then((snapshot) => {
-        var array = [];
-        snapshot.forEach((apt) => {
-          if (apt.exists) {
-            var ret = apt.data();
-            console.log(ret);
-          }
-        });
+      .then((doc) => {
+        if (doc.data().account_type === 'client') {
+          service_type = 'sender';
+        } else if (doc.data().account_type === 'doctor') {
+          service_type = 'receiver';
+        }
+      })
+      .then(() => {
+        console.log('currSer', service_type);
+        firebase
+          .firestore()
+          .collection('appointment')
+          .where(service_type.id, '==', Firebase.auth().currentUser.uid)
+          .get()
+          .then((snapshot) => {
+            var array = [];
+            snapshot.forEach((apt) => {
+              if (apt.exists) {
+                var ret = apt.data();
+                console.log(ret);
+              }
+            });
+          });
       });
   };
 
