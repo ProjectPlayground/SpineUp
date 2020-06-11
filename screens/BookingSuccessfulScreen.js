@@ -48,15 +48,33 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
   const get = (user) => {
     var service_type = '';
 
-    if (user.account_type === 'client') {
+  {/*  if (user.account_type === 'client') {
       service_type = 'sender';
     } else if (user.account_type === 'doctor') {
       service_type = 'receiver';
     }
-    firebase  
+  */}
+    if (
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(Firebase.auth().currentUser.uid)
+        .where('account_type', '==', 'client')
+    ) {
+      service_type = 'sender';
+    } else if (
+      firebase
+        .firestore()
+        .collection('users')
+        .doc(Firebase.auth().currentUser.uid)
+        .where('account_type', '==', 'doctor')
+    ) {
+      service_type = 'receiver';
+    }
+    firebase
       .firestore()
       .collection('appointment')
-      .where('service_type', '==', user.id)
+      .where('service_type.id', '==', Firebase.auth().currentUser.uid)
       .get()
       .then((snapshot) => {
         var array = [];
