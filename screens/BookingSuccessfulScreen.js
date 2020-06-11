@@ -45,6 +45,30 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
     account_type: 'doctor',
   };
 
+  const get = (user) => {
+    var service_type = '';
+
+    if (user.account_type === 'client') {
+      service_type = 'sender';
+    } else if (user.account_type === 'doctor') {
+      service_type = 'receiver';
+    }
+    firebase  
+      .firestore()
+      .collection('appointment')
+      .where('service_type', '==', user.id)
+      .get()
+      .then((snapshot) => {
+        var array = [];
+        snapshot.forEach((apt) => {
+          if (apt.exists) {
+            var ret = apt.data();
+            console.log(ret);
+          }
+        });
+      });
+  };
+
 {/*const appointmentID =
     Firebase.auth().currentUser.uid.localeCompare(docID) > 0
       ? Firebase.auth().currentUser.uid + '' + docID
@@ -242,6 +266,11 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
         <Button gradient onPress={() => make()}>
           <Text white center>
             Confirm
+          </Text>
+        </Button>
+        <Button gradient onPress={() => get()}>
+          <Text white center>
+            get Appointments
           </Text>
         </Button>
       </Block>
