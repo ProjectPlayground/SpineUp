@@ -20,7 +20,32 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
   //console.log('docId', docID);
   const [appointments, setAppointments] = React.useState([]);
 
-  const appointmentID =
+  const make = () => {
+    const appointment = {
+      date: date,
+      time: time,
+      sender: user,
+      receiver: receiver,
+    };
+    firebase.firestore().collection('appointment').doc().set(appointment);
+  };
+
+  const user = {
+    name: Firebase.auth().currentUser.displayName,
+    id: Firebase.auth().currentUser.uid,
+    avatar: Firebase.auth().currentUser.photoURL,
+    account_type: 'client',
+  };
+
+  const receiver = {
+    name: name,
+    subtitle: subtitle,
+    id: docID,
+    avatar: profilePic,
+    account_type: 'doctor',
+  };
+
+{/*const appointmentID =
     Firebase.auth().currentUser.uid.localeCompare(docID) > 0
       ? Firebase.auth().currentUser.uid + '' + docID
       : docID + '' + firebase.auth().currentUser.uid;
@@ -110,6 +135,9 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
     id: Firebase.auth().currentUser.uid,
     avatar: Firebase.auth().currentUser.photoURL,
   };
+*/}
+
+
 
   return (
     <SafeAreaView style={styles.container}>
