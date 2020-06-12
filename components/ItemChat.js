@@ -18,7 +18,7 @@ const ItemChat = ({ item, navigation }) => {
       .get()
       .then((doc) => {
         //console.log(doc.data().name);
-        console.log(doc.data().pic);
+        //console.log(doc.data().pic);
         setName(doc ? doc.data().name : '');
 
         setPic(doc ? doc.data().pic : null);

@@ -72,19 +72,28 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
         firebase
           .firestore()
           .collection('appointment')
-          .where(service_type, 'id', '==', Firebase.auth().currentUser.uid)
+          .where(
+            new firebase.firestore.FieldPath(service_type, 'id'),
+            '==',
+            Firebase.auth().currentUser.uid
+          )
           .get()
           .then((snapshot) => {
             var array = [];
             snapshot.forEach((apt) => {
               if (apt.exists) {
                 var ret = apt.data();
-                console.log(ret);
+                //.console.log(ret);
+                array.push(ret);
+                setAppointments(array);
+                console.log('apt', appointments);
               }
             });
           });
       });
   };
+
+  //console.log('apt', appointments);
 
 {/*const appointmentID =
     Firebase.auth().currentUser.uid.localeCompare(docID) > 0

@@ -26,7 +26,6 @@ const MessaagesScreen = ({ navigation }) => {
       setChatList([]);
     };
   },[]);
-  //console.log(chatList);
 
   const renderItem = ({ item }) => {
     return <ItemChat item={item} navigation={navigation} />;

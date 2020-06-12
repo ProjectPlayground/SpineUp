@@ -7,7 +7,7 @@ import firebase from 'firebase';
 const MessageDetails = ({ route }) => {
   const [messages, setMessages] = useState([]);
   const itemId = route.params.itemId;
-  console.log('itemid', itemId);
+  //console.log('itemid', itemId);
   const chatId =
     Firebase.auth().currentUser.uid.localeCompare(itemId) > 0
       ? Firebase.auth().currentUser.uid + '' + itemId
@@ -158,6 +158,7 @@ const MessageDetails = ({ route }) => {
       } catch {}
     };
   }, []);
+  //console.log(messages);
 
   return <GiftedChat messages={messages} onSend={send} user={user()} />;
 };
