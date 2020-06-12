@@ -72,7 +72,7 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
         firebase
           .firestore()
           .collection('appointment')
-          .where(service_type.id, '==', Firebase.auth().currentUser.uid)
+          .where(service_type, 'id', '==', Firebase.auth().currentUser.uid)
           .get()
           .then((snapshot) => {
             var array = [];
