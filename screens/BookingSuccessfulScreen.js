@@ -1,7 +1,7 @@
 /* @flow weak */
 
 import React from 'react';
-import { SafeAreaView, StyleSheet, Image } from 'react-native';
+import { ScrollView, StyleSheet, Image } from 'react-native';
 import { MaterialIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import Firebase from '../config/Firebase';
 import firebase from 'firebase';
@@ -18,7 +18,8 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
   const time = route.params.time;
   const docID = route.params.docId;
   //console.log('docId', docID);
-  const [appointments, setAppointments] = React.useState([]);
+  const [appointments, setAppointments] = React.useState();
+  const [data, setData] = React.useState('');
 
   const make = () => {
     const appointment = {
@@ -63,8 +64,10 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
       .then((doc) => {
         if (doc.data().account_type === 'client') {
           service_type = 'sender';
+          setData('receiver');
         } else if (doc.data().account_type === 'doctor') {
           service_type = 'receiver';
+          setData('sender');
         }
       })
       .then(() => {
@@ -83,10 +86,10 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
             snapshot.forEach((apt) => {
               if (apt.exists) {
                 var ret = apt.data();
-                //.console.log(ret);
+                //console.log(ret.time);
                 array.push(ret);
                 setAppointments(array);
-                console.log('apt', appointments);
+                //console.log('apt', appointments);
               }
             });
           });
@@ -187,10 +190,14 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
   };
 */}
 
+  //console.log('state.apt', appointments);
 
-
+  appointments.map((apt) => {
+    console.log('apt', apt.time);
+  });
+  //console.log('test', test);
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <Block color="white" padding={theme.sizes.base * 2}>
         <Block marginBottom={theme.sizes.base * 4}>
           <Text h1 bold>
@@ -300,7 +307,7 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
           </Text>
         </Button>
       </Block>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
