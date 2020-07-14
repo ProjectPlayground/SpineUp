@@ -48,14 +48,6 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
 
   const get = () => {
     var service_type = '';
-
-  {/*  if (user.account_type === 'client') {
-      service_type = 'sender';
-    } else if (user.account_type === 'doctor') {
-      service_type = 'receiver';
-    }
-  */}
-
     firebase
       .firestore()
       .collection('users')
@@ -71,7 +63,6 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
         }
       })
       .then(() => {
-        console.log('currSer', service_type);
         firebase
           .firestore()
           .collection('appointment')
@@ -89,14 +80,14 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
                 //console.log(ret.time);
                 array.push(ret);
                 setAppointments(array);
-                //console.log('apt', appointments);
+                console.log('apt', appointments);
               }
             });
           });
       });
   };
 
-  //console.log('apt', appointments);
+  console.log('apt', appointments);
 
 {/*const appointmentID =
     Firebase.auth().currentUser.uid.localeCompare(docID) > 0
@@ -192,9 +183,9 @@ const BookingSuccessfulScreen = ({ navigation, route }) => {
 
   //console.log('state.apt', appointments);
 
-  appointments.map((apt) => {
+{/*//  appointments.map((apt) => {
     console.log('apt', apt.time);
-  });
+  });*/}
   //console.log('test', test);
   return (
     <ScrollView style={styles.container}>
